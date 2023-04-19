@@ -1,10 +1,12 @@
 const express = require("express");
+const morgan = require("morgan");
 const app = express();
 const port = 3000;
 
-app.get("/", (req, res) => {
-  res.send("CsaccasdasdaccdC");
-});
+const route = require("./src/routes");
+app.use(morgan("combined"));
+
+route(app);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
