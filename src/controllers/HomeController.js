@@ -1,4 +1,4 @@
-const modelSV = require("../models/sv.model");
+const sv = require("../models/sv.model");
 
 class HomeController {
   // [GET] / home
@@ -7,8 +7,12 @@ class HomeController {
   }
 
   showHome(req, res) {
-    modelSV.getAllData((rows) => {
-      res.send(rows);
+    sv.getAllData((err, rows) => {
+      if (!err) {
+        res.json(rows);
+      } else {
+        res.status(400).json({ error: "error" });
+      }
     });
   }
 }
