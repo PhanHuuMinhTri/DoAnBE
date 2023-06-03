@@ -1,12 +1,12 @@
 const db = require("../config/db");
 
-const modelSV = {
-  getAllData: (callback) => {
+class SV {
+  getAllData(callback) {
     db.query("Select * from hocsinh", (err, rows, fields) => {
       if (err) throw err;
-      callback(rows);
+      callback(err, rows);
     });
-  },
-};
+  }
+}
 
-module.exports = modelSV;
+module.exports = new SV();
