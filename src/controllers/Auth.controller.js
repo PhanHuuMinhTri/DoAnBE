@@ -1,8 +1,6 @@
 const auth = require("../models/auth.model");
 
 class AuthController {
-  // [GET] / home
-
   login(req, res) {
     auth.login(req.body, (err, rows) => {
       if (!err) {
