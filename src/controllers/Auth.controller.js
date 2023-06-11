@@ -5,7 +5,7 @@ class AuthController {
     auth.login(req.body, (err, rows) => {
       if (!err) {
         if (rows.length > 0) {
-          const account = { idUser: rows[0]?.IdAccount, name: rows[0]?.Name };
+          const account = { idUser: rows[0]?.IdUser, name: rows[0]?.Name };
 
           res.status(200).send(account);
         } else {

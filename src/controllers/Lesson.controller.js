@@ -19,7 +19,6 @@ class LessonController {
     try {
       lesson.getListLessonByIdLesson(id, (err, rows) => {
         if (!err) {
-          console.log("rows", rows);
           res.status(200).send(rows[0]);
         } else {
           res.status(500).json({ error: "error when get lesson from db" });
