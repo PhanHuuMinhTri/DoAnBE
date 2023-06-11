@@ -2,7 +2,6 @@ const db = require("../config/db");
 
 class Auth {
   login(data, callback) {
-    console.log("data", data);
     db.query(
       `Select * from account join user on account.IdUser = user.IdUser WHERE Account = '${data?.values?.account}' AND Password =  '${data?.values?.password}'`,
       (err, rows) => {
@@ -12,11 +11,9 @@ class Auth {
   }
 
   register(data, callback) {
-    console.log("data", data);
     db.query(
       `Select * from account join user on account.IdUser = user.IdUser WHERE Account = '${data?.values?.account}' AND EmailAddress =  '${data?.values?.email}'`,
       (err, rows) => {
-        console.log("rows1", rows);
         if (rows.length > 0) {
           callback("Account is already singup!", []);
         } else {

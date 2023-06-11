@@ -9,7 +9,6 @@ class QuestionController {
     try {
       question.getListQuestion(id, (err, rows) => {
         if (!err) {
-          console.log("rows question", rows);
           res.status(200).send(rows);
         } else {
           res.status(500).json({ error: "error when get lesson from db" });
@@ -41,14 +40,10 @@ class QuestionController {
                   { courseId, userId },
                   (err, row) => {
                     if (!err) {
-                      console.log("rows", row);
                       const userStudyLength = row.length;
-                      console.log("userStudyLength", userStudyLength);
                       lesson.getListLessonByIdCourse(courseId, (err, rows) => {
                         if (!err) {
                           const lengthLesson = rows.length;
-
-                          console.log("lengthLesson", lengthLesson);
 
                           progress.getProgressById(
                             { courseId, userId },
@@ -57,7 +52,6 @@ class QuestionController {
                               if (!err) {
                                 const progressNumber =
                                   userStudyLength / lengthLesson;
-                                console.log("progressNumber", progressNumber);
                                 if (rows.length > 0) {
                                   progress.updateProgress({
                                     idProgress: rows[0].idProgress,

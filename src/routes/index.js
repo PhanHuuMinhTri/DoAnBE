@@ -7,12 +7,10 @@ const flaskCardRouter = require("./flaskCard.route");
 const questionRouter = require("./question.route");
 const progressRouter = require("./progress.route");
 const historyStudyRouter = require("./historyStudy.route");
+const testOnlineRouter = require("./test-online.route");
+const teacherRouter = require("./teacher.route");
 
 function route(app) {
-  app.get("/", (req, res) => {
-    res.send("Home ne");
-  });
-
   app.use("/home", homeRouter);
   app.use("/auth", authRouter);
   app.use("/course", courseRouter);
@@ -22,6 +20,8 @@ function route(app) {
   app.use("/question", questionRouter);
   app.use("/progress", progressRouter);
   app.use("/history", historyStudyRouter);
+  app.use("/test-online", testOnlineRouter);
+  app.use("/teacher", teacherRouter);
 }
 
 module.exports = route;
