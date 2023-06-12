@@ -10,6 +10,31 @@ class Auth {
     );
   }
 
+  getProfile(id, callback) {
+    db.query(`Select * from user where IdUser = '${id}'`, (err, rows) => {
+      callback(err, rows);
+    });
+  }
+
+  updateProfile({ id, data }, callback) {
+    db.query(
+      `UPDATE user SET Name = '${data.username}', EmailAddress='${data.email}', Phone = '${data.phone}', Avatar = '${data.avatar}'
+       WHERE user.IdUser = ${id}`,
+      (err, rows) => {
+        callback(err, rows);
+      }
+    );
+  }
+
+  updatePassword({ id, data }, callback) {
+    db.query(
+      `UPDATE account SET Password = '${data}' WHERE account.IdAccount = ${id}`,
+      (err, rows) => {
+        callback(err, rows);
+      }
+    );
+  }
+
   register(data, callback) {
     db.query(
       `Select * from account join user on account.IdUser = user.IdUser WHERE Account = '${data?.values?.account}' AND EmailAddress =  '${data?.values?.email}'`,

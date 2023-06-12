@@ -17,6 +17,45 @@ class AuthController {
     });
   }
 
+  getProfile(req, res) {
+    const id = req.params.id;
+    auth.getProfile(id, (err, rows) => {
+      if (!err) {
+        res.status(200).send(rows[0]);
+      } else {
+        res.status(400).json({ error: "error" });
+      }
+    });
+  }
+
+  updateProfile(req, res) {
+    const id = req.params.id;
+    auth.updateProfile({ id, data: req.body }, (err, rows) => {
+      if (!err) {
+        auth.getProfile(id, (err, rows) => {
+          if (!err) {
+            res.status(200).send(rows[0]);
+          } else {
+            res.status(400).json({ error: "error" });
+          }
+        });
+      } else {
+        res.status(400).json({ error: "error" });
+      }
+    });
+  }
+
+  updatePassword(req, res) {
+    const id = req.params.id;
+    auth.updatePassword({ id, data: req.body.password }, (err, rows) => {
+      if (!err) {
+        res.status(200).send("Success");
+      } else {
+        res.status(400).json({ error: "error" });
+      }
+    });
+  }
+
   register(req, res) {
     auth.register(req.body, (err, rows) => {
       if (!err) {
