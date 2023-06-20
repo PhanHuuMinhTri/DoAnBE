@@ -9,6 +9,15 @@ class Course {
       }
     );
   }
+
+  getAllCourse(callback) {
+    db.query(
+      `Select * from course join teacher on course.idTeacher = teacher.idTeacher`,
+      (err, rows) => {
+        callback(err, rows);
+      }
+    );
+  }
 }
 
 module.exports = new Course();

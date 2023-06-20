@@ -7,7 +7,7 @@ const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
-  database: "datn",
+  database: "pbl7",
 });
 
 // Kết nối đến MySQL
@@ -19,15 +19,5 @@ connection.connect(function (err) {
 
   console.log("Kết nối đến MySQL thành công với ID " + connection.threadId);
 });
-
-// // Thực hiện truy vấn
-// connection.query("SELECT * FROM ten_bang", function (err, rows, fields) {
-//   if (err) throw err;
-
-//   console.log("Dữ liệu từ MySQL: ", rows);
-// });
-
-// // Đóng kết nối MySQL khi đã xử lý xong
-// connection.end();
 
 module.exports = connection;
