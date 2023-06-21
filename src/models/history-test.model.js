@@ -2,6 +2,9 @@ const db = require("../config/db");
 
 class HistoryTest {
   updateHistoryTestSubmit({ testId, userId, totalPoint }, callback) {
+    console.log("testId", testId);
+    console.log("userId", userId);
+    console.log("totalPoint", totalPoint);
     db.query(
       `select * from historytest where idLessonTest = '${testId}' && idUser = '${userId}'`,
       (err, rows) => {

@@ -45,12 +45,12 @@ class QuestionTestController {
               } else {
                 res
                   .status(500)
-                  .json({ error: "error when get lesson from db" });
+                  .json({ error: "error when set history from db" });
               }
             }
           );
         } else {
-          res.status(500).json({ error: "error when get lesson from db" });
+          res.status(500).json({ error: "error when get option correct" });
         }
       });
     } catch (error) {}
