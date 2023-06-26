@@ -20,7 +20,6 @@ class Course {
   }
 
   addCourse(data, callback) {
-    console.log("data", data);
     db.query(
       `INSERT INTO course ( nameCourse, numberLession, numberTest, imageCourse, description, idTeacher) VALUES ( '${data?.nameCourse}', '${data?.numberLession}', '${data.numberTest}', '${data.imageCourse}', '${data.description}', '${data.idTeacher}')`,
       (err, rows) => {

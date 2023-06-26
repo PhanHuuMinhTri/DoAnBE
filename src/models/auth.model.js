@@ -16,6 +16,24 @@ class Auth {
     });
   }
 
+  getUser(callback) {
+    db.query(`Select * from user`, (err, rows) => {
+      callback(err, rows);
+    });
+  }
+
+  deleteUser(id, callback) {
+    db.query(`DELETE FROM account WHERE IdUser = ${id}`, (err, rows) => {
+      if (!err) {
+        db.query(`DELETE FROM user WHERE IdUser = ${id}`, (err, rows) => {
+          callback(err, rows);
+        });
+      } else {
+        callback(true);
+      }
+    });
+  }
+
   updateProfile({ id, data }, callback) {
     db.query(
       `UPDATE user SET Name = '${data.username}', EmailAddress='${data.email}', Phone = '${data.phone}', Avatar = '${data.avatar}'

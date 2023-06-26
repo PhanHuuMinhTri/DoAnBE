@@ -16,6 +16,46 @@ class QuestionController {
       });
     } catch (error) {}
   }
+
+  getQuestions(req, res) {
+    const id = req.params.id;
+    try {
+      question.getQuestions(id, (err, rows) => {
+        if (!err) {
+          res.status(200).send(rows);
+        } else {
+          res.status(500).json({ error: "error when get lesson from db" });
+        }
+      });
+    } catch (error) {}
+  }
+
+  getQuestion(req, res) {
+    const id = req.params.id;
+    try {
+      question.getQuestion(id, (err, rows) => {
+        if (!err) {
+          res.status(200).send(rows);
+        } else {
+          res.status(500).json({ error: "error when get lesson from db" });
+        }
+      });
+    } catch (error) {}
+  }
+
+  getOptionsByIdQuestion(req, res) {
+    const id = req.params.id;
+    try {
+      question.getOptions(id, (err, rows) => {
+        if (!err) {
+          res.status(200).send(rows);
+        } else {
+          res.status(500).json({ error: "error when get lesson from db" });
+        }
+      });
+    } catch (error) {}
+  }
+
   async submitQuestion(req, res) {
     const id = req.params.id;
     const courseId = req.params.courseId;
@@ -81,6 +121,59 @@ class QuestionController {
             .send({ result: rows, point: totalPoint, values: values });
         } else {
           res.status(500).json({ error: "error when get lesson from db" });
+        }
+      });
+    } catch (error) {}
+  }
+
+  addQuestion(req, res) {
+    const data = req.body;
+    try {
+      question.addQuestion(data, (err, rows) => {
+        if (!err) {
+          res.status(200).send("Add question success");
+        } else {
+          res.status(500).json({ error: "error when set question from db" });
+        }
+      });
+    } catch (error) {}
+  }
+
+  updateQuestion(req, res) {
+    const data = req.body;
+    try {
+      question.updateQuestion(data, (err, rows) => {
+        if (!err) {
+          res.status(200).send("Update question success");
+        } else {
+          res.status(500).json({ error: "error when set question from db" });
+        }
+      });
+    } catch (error) {}
+  }
+
+  updateOptions(req, res) {
+    const id = req.params.id;
+    const data = req.body;
+    try {
+      question.updateOptions({ id, data }, (err, rows) => {
+        if (!err) {
+          res.status(200).send("Update options success");
+        } else {
+          res.status(500).json({ error: "error when set options from db" });
+        }
+      });
+    } catch (error) {}
+  }
+
+  deleteQuestion(req, res) {
+    const id = req.params.id;
+    try {
+      question.deleteQuestion(id, (err, rows) => {
+        if (!err) {
+          res.status(200).send("Delete question success");
+        } else {
+          res.status(500).json({ error: "error when delete question from db" });
         }
       });
     } catch (error) {}
