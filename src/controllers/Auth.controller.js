@@ -28,6 +28,29 @@ class AuthController {
     });
   }
 
+  getUser(req, res) {
+    auth.getUser((err, rows) => {
+      if (!err) {
+        res.status(200).send(rows);
+      } else {
+        res.status(400).json({ error: "error" });
+      }
+    });
+  }
+
+  deleteUser(req, res) {
+    console.log("zo day");
+    const id = req.params.id;
+    console.log("id", id);
+    auth.deleteUser(id, (err, rows) => {
+      if (!err) {
+        res.status(200).send("Delete success");
+      } else {
+        res.status(400).json({ error: "error" });
+      }
+    });
+  }
+
   updateProfile(req, res) {
     const id = req.params.id;
     auth.updateProfile({ id, data: req.body }, (err, rows) => {
