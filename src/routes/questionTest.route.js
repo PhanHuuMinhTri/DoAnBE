@@ -2,19 +2,19 @@ const express = require("express");
 const router = express.Router();
 const QuestionTestController = require("../controllers/QuestionTest.controller");
 
-router.get("/lesson/:id", QuestionController.getListQuestionByIdLesson);
-router.get("/lesson-question/:id", QuestionController.getQuestions);
-router.post(
-  "/:courseId/submit-question/:id",
-  QuestionController.submitQuestion
-);
+router.get("/test/:id", QuestionTestController.getListQuestionByIdTest);
+router.get("/test-question/:id", QuestionTestController.getQuestions);
+// router.post(
+//   "/:courseId/submit-question/:id",
+//   QuestionController.submitQuestion
+// );
 
-router.get("/:id", QuestionController.getQuestion);
-router.get("/:id/options", QuestionController.getOptionsByIdQuestion);
+router.get("/:id", QuestionTestController.getQuestion);
+router.get("/:id/options", QuestionTestController.getOptionsByIdQuestion);
 
-router.post("/:id/options/upload", QuestionController.updateOptions);
+router.post("/:id/options/upload", QuestionTestController.updateOptions);
 
-router.post("/add", QuestionController.addQuestion);
-router.post("/edit", QuestionController.updateQuestion);
-router.delete("/delete/:id", QuestionController.deleteQuestion);
+router.post("/add", QuestionTestController.addQuestion);
+router.post("/edit", QuestionTestController.updateQuestion);
+router.delete("/delete/:id", QuestionTestController.deleteQuestion);
 module.exports = router;

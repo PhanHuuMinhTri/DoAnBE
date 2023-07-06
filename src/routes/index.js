@@ -9,6 +9,7 @@ const progressRouter = require("./progress.route");
 const historyStudyRouter = require("./historyStudy.route");
 const testOnlineRouter = require("./test-online.route");
 const teacherRouter = require("./teacher.route");
+const questionTestRouter = require("./questionTest.route");
 
 function route(app) {
   app.use("/home", homeRouter);
@@ -18,6 +19,7 @@ function route(app) {
   app.use("/lesson", lessonRouter);
   app.use("/flask-card", flaskCardRouter);
   app.use("/question", questionRouter);
+  app.use("/question-test", questionTestRouter);
   app.use("/progress", progressRouter);
   app.use("/history", historyStudyRouter);
   app.use("/test-online", testOnlineRouter);

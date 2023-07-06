@@ -20,9 +20,12 @@ class QuestionTest {
   }
 
   getQuestions(id, callback) {
-    db.query(`Select * from questiontestonline where idTest='${id}' `, (err, rows) => {
-      callback(err, rows);
-    });
+    db.query(
+      `Select * from questiontestonline where idTest='${id}' `,
+      (err, rows) => {
+        callback(err, rows);
+      }
+    );
   }
 
   getQuestion(id, callback) {
@@ -33,8 +36,6 @@ class QuestionTest {
       }
     );
   }
-
-  
 
   getOptions(id, callback) {
     db.query(
@@ -49,7 +50,6 @@ class QuestionTest {
     db.query(
       `INSERT INTO questiontestonline ( idTest  ,questionText ) VALUES ( '${data?.idTest}', '${data?.questionText}')`,
       (err, rows) => {
-        console.log("err", err);
         callback(err, rows);
       }
     );
@@ -58,7 +58,6 @@ class QuestionTest {
     db.query(
       `Update questiontestonline set questionText = '${data?.questionText}'   where idQuestion ='${data?.idQuestion}'`,
       (err, rows) => {
-        console.log("err", err);
         callback(err, rows);
       }
     );
@@ -84,18 +83,20 @@ class QuestionTest {
         }
       });
 
-      callback(true, "Update option success");
+      callback(false, "Update option success");
     } catch (error) {
-      console.log('error', error)
-      callback(false, "Update option fail");
+      console.log("error", error);
+      callback(true, "Update option fail");
     }
   }
 
   deleteQuestion(id, callback) {
-    db.query(`DELETE FROM questiontestonline WHERE idQuestion = '${id}'`, (err, rows) => {
-      console.log("err", err);
-      callback(err, rows);
-    });
+    db.query(
+      `DELETE FROM questiontestonline WHERE idQuestion = '${id}'`,
+      (err, rows) => {
+        callback(err, rows);
+      }
+    );
   }
 }
 
