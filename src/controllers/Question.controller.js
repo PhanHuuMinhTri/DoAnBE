@@ -157,6 +157,8 @@ class QuestionController {
     const data = req.body;
     try {
       question.updateOptions({ id, data }, (err, rows) => {
+        console.log("error", err);
+        console.log("row", rows);
         if (!err) {
           res.status(200).send("Update options success");
         } else {

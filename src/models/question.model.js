@@ -34,8 +34,6 @@ class Question {
     );
   }
 
-
-
   getOptions(id, callback) {
     db.query(
       `Select * from  options where idQuestion = '${id}' `,
@@ -65,6 +63,8 @@ class Question {
   }
 
   updateOptions({ id, data }, callback) {
+    console.log("id", id);
+    console.log("data", data);
 
     try {
       data.options.forEach((element) => {
@@ -72,26 +72,27 @@ class Question {
         if (element?.idOption) {
           console.log("zo day1");
           db.query(
-            `Update options set optionText = '${element?.optionText
-            }', isCorrect ='${element?.isCorrect ? 1 : 0}' where idOption ='${element?.idOption
+            `Update options set optionText = '${
+              element?.optionText
+            }', isCorrect ='${element?.isCorrect ? 1 : 0}' where idOption ='${
+              element?.idOption
             }'`
           );
         } else {
           console.log("zo day2", element);
           db.query(
-            `INSERT INTO options ( idQuestion, optionText, isCorrect) VALUES ( '${id}', '${element?.optionText
+            `INSERT INTO options ( idQuestion, optionText, isCorrect) VALUES ( '${id}', '${
+              element?.optionText
             }', '${element?.isCorrect ? 1 : 0}')`
           );
         }
       });
 
-      callback(true, "update option success")
+      callback(false, "update option success");
     } catch (error) {
-
-      callback(false, "update option fail");
+      console.log("err", error);
+      callback(true, "update option fail");
     }
-
-
   }
 
   deleteQuestion(id, callback) {
