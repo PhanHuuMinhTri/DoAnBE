@@ -14,6 +14,19 @@ class TestOnlineController {
     } catch (error) {}
   }
 
+  getTestOnline(req, res) {
+    const id = req.params.id;
+    try {
+      testOnline.getTestOnline(id, (err, rows) => {
+        if (!err) {
+          res.status(200).send(rows);
+        } else {
+          res.status(500).json({ error: "error when get test online from db" });
+        }
+      });
+    } catch (error) {}
+  }
+
   getRankTestOnline(req, res) {
     const testId = req.params.testId;
     try {
@@ -38,6 +51,45 @@ class TestOnlineController {
           res.status(200).send(rows);
         } else {
           res.status(500).json({ error: "error when test online from db" });
+        }
+      });
+    } catch (error) {}
+  }
+
+  addTestOnline(req, res) {
+    const data = req.body;
+    try {
+      testOnline.addTestOnline(data, (err, rows) => {
+        if (!err) {
+          res.status(200).send("Add test online success");
+        } else {
+          res.status(500).json({ error: "error when set test online from db" });
+        }
+      });
+    } catch (error) {}
+  }
+
+  updateTestOnline(req, res) {
+    const data = req.body;
+    try {
+      testOnline.updateTestOnline(data, (err, rows) => {
+        if (!err) {
+          res.status(200).send("Update test online success");
+        } else {
+          res.status(500).json({ error: "error when set test online from db" });
+        }
+      });
+    } catch (error) {}
+  }
+
+  deleteTestOnline(req, res) {
+    const id = req.params.id;
+    try {
+      testOnline.updateTestOnline(id, (err, rows) => {
+        if (!err) {
+          res.status(200).send("Delete test success");
+        } else {
+          res.status(500).json({ error: "error when delete test from db" });
         }
       });
     } catch (error) {}
