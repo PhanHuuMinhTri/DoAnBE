@@ -10,6 +10,15 @@ class Question {
     );
   }
 
+  getOptionCorrect({ id, courseId }, callback) {
+    db.query(
+      `Select question.idQuestion, question.question, options.idOption, options.optionText, options.isCorrect from question join options on question.idQuestion = options.idQuestion JOIN lesson ON question.idLesson = lesson.idLesson where  lesson.idCourse = ${courseId} && question.idLesson=${id} && options.isCorrect = '1' `,
+      (err, rows) => {
+        callback(err, rows);
+      }
+    );
+  }
+
   getQuestions(id, callback) {
     db.query(`Select * from question where idLesson='${id}' `, (err, rows) => {
       callback(err, rows);
@@ -25,14 +34,7 @@ class Question {
     );
   }
 
-  getOptionCorrect({ id, courseId }, callback) {
-    db.query(
-      `Select question.idQuestion, question.question, options.idOption, options.optionText, options.isCorrect from question join options on question.idQuestion = options.idQuestion JOIN lesson ON question.idLesson = lesson.idLesson where  lesson.idCourse = ${courseId} && question.idLesson=${id} && options.isCorrect = '1' `,
-      (err, rows) => {
-        callback(err, rows);
-      }
-    );
-  }
+
 
   getOptions(id, callback) {
     db.query(
@@ -63,30 +65,33 @@ class Question {
   }
 
   updateOptions({ id, data }, callback) {
-    console.log("data", data.options);
-    console.log("id", id);
-    data.options.forEach((element) => {
-      console.log("element", element);
-      if (element?.idOption) {
-        console.log("zo day1");
-        db.query(
-          `Update options set optionText = '${
-            element?.optionText
-          }', isCorrect ='${element?.isCorrect ? 1 : 0}' where idOption ='${
-            element?.idOption
-          }'`
-        );
-      } else {
-        console.log("zo day2", element);
-        db.query(
-          `INSERT INTO options ( idQuestion, optionText, isCorrect) VALUES ( '${id}', '${
-            element?.optionText
-          }', '${element?.isCorrect ? 1 : 0}')`
-        );
-      }
-    });
 
-    callback(false, "");
+    try {
+      data.options.forEach((element) => {
+        console.log("element", element);
+        if (element?.idOption) {
+          console.log("zo day1");
+          db.query(
+            `Update options set optionText = '${element?.optionText
+            }', isCorrect ='${element?.isCorrect ? 1 : 0}' where idOption ='${element?.idOption
+            }'`
+          );
+        } else {
+          console.log("zo day2", element);
+          db.query(
+            `INSERT INTO options ( idQuestion, optionText, isCorrect) VALUES ( '${id}', '${element?.optionText
+            }', '${element?.isCorrect ? 1 : 0}')`
+          );
+        }
+      });
+
+      callback(true, "update option success")
+    } catch (error) {
+
+      callback(false, "update option fail");
+    }
+
+
   }
 
   deleteQuestion(id, callback) {
