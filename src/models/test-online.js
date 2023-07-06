@@ -46,7 +46,7 @@ class TestOnline {
 
   deleteTestOnline(id, callback) {
     db.query(
-      `DELETE FROM lessontestonline WHERE idLesson = '${id}'`,
+      `DELETE FROM lessontestonline WHERE idLessonTest = '${id}'`,
       (err, rows) => {
         console.log("err", err);
         callback(err, rows);

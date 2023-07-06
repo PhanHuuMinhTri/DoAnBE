@@ -85,7 +85,7 @@ class TestOnlineController {
   deleteTestOnline(req, res) {
     const id = req.params.id;
     try {
-      testOnline.updateTestOnline(id, (err, rows) => {
+      testOnline.deleteTestOnline(id, (err, rows) => {
         if (!err) {
           res.status(200).send("Delete test success");
         } else {

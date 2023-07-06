@@ -55,6 +55,100 @@ class QuestionTestController {
       });
     } catch (error) {}
   }
+
+
+  getQuestions(req, res) {
+    const id = req.params.id;
+    try {
+      questionTest.getQuestions(id, (err, rows) => {
+        if (!err) {
+          res.status(200).send(rows);
+        } else {
+          res.status(500).json({ error: "error when get questionsfrom db" });
+        }
+      });
+    } catch (error) {}
+  }
+
+  getQuestion(req, res) {
+    const id = req.params.id;
+    try {
+      questionTest.getQuestion(id, (err, rows) => {
+        if (!err) {
+          res.status(200).send(rows);
+        } else {
+          res.status(500).json({ error: "error when get question from db" });
+        }
+      });
+    } catch (error) {}
+  }
+
+  getOptionsByIdQuestion(req, res) {
+    const id = req.params.id;
+    try {
+      questionTest.getOptions(id, (err, rows) => {
+        if (!err) {
+          res.status(200).send(rows);
+        } else {
+          res.status(500).json({ error: "error when get options from db" });
+        }
+      });
+    } catch (error) {}
+  }
+
+  addQuestion(req, res) {
+    const data = req.body;
+    try {
+      questionTest.addQuestion(data, (err, rows) => {
+        if (!err) {
+          res.status(200).send("Add question success");
+        } else {
+          res.status(500).json({ error: "error when set question from db" });
+        }
+      });
+    } catch (error) {}
+  }
+
+  updateQuestion(req, res) {
+    const data = req.body;
+    try {
+      questionTest.updateQuestion(data, (err, rows) => {
+        if (!err) {
+          res.status(200).send("Update question success");
+        } else {
+          res.status(500).json({ error: "error when set question from db" });
+        }
+      });
+    } catch (error) {}
+  }
+
+  updateOptions(req, res) {
+    const id = req.params.id;
+    const data = req.body;
+    try {
+      questionTest.updateOptions({ id, data }, (err, rows) => {
+        if (!err) {
+          res.status(200).send("Update options success");
+        } else {
+          res.status(500).json({ error: "error when set options from db" });
+        }
+      });
+    } catch (error) {}
+  }
+
+  deleteQuestion(req, res) {
+    const id = req.params.id;
+    try {
+      questionTest.deleteQuestion(id, (err, rows) => {
+        if (!err) {
+          res.status(200).send("Delete question success");
+        } else {
+          res.status(500).json({ error: "error when delete question from db" });
+        }
+      });
+    } catch (error) {}
+  }
+
 }
 
 module.exports = new QuestionTestController();
