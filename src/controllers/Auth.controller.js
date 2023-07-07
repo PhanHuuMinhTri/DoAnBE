@@ -17,6 +17,23 @@ class AuthController {
     });
   }
 
+  loginAdmin(req, res) {
+    auth.loginAdmin(req.body, (err, rows) => {
+      if (!err) {
+        if (rows.length > 0) {
+          const account = { idUser: rows[0]?.IdUser, name: rows[0]?.Name };
+          console.log('account', account)
+
+          res.status(200).send(account);
+        } else {
+          res.status(400).json({ error: "user or password invalid" });
+        }
+      } else {
+        res.status(400).json({ error: "error" });
+      }
+    });
+  }
+
   getProfile(req, res) {
     const id = req.params.id;
     auth.getProfile(id, (err, rows) => {

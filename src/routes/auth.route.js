@@ -3,6 +3,7 @@ const router = express.Router();
 const authController = require("../controllers/Auth.controller");
 
 router.post("/login", authController.login);
+router.post("/login-admin", authController.loginAdmin);
 router.post("/register", authController.register);
 router.get("/user", authController.getUser);
 router.delete("/delete/:id", authController.deleteUser);
