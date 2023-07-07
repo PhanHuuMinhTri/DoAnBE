@@ -10,6 +10,15 @@ class Auth {
     );
   }
 
+  loginAdmin(data, callback) {
+    db.query(
+      `Select * from account join user on account.IdUser = user.IdUser WHERE Account = '${data?.values?.account}' AND Password =  '${data?.values?.password}' AND ROLE = '1' `,
+      (err, rows) => {
+        callback(err, rows);
+      }
+    );
+  }
+
   getProfile(id, callback) {
     db.query(`Select * from user where IdUser = '${id}'`, (err, rows) => {
       callback(err, rows);

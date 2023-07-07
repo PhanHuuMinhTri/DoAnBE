@@ -34,9 +34,21 @@ class WriteKanji {
   }
 
   deletePracticeWrite(id, callback) {
-    db.query(`DELETE FROM practicewrite WHERE id = '${id}'`, (err, rows) => {
-      callback(err, rows);
+    console.log('id', id)
+
+    db.query(`DELETE FROM kanjiwrite WHERE idPracticWrite = '${id}'`, (err, rows) => {
+
+      if(!err){
+        db.query(`DELETE FROM practicewrite WHERE id = '${id}'`, (err, rows) => {
+           callback(err, rows);
+         });
+      }
+      else{
+        callback(err, rows);
+
+      }
     });
+   
   }
 
   addKanji(data, callback) {
@@ -56,6 +68,7 @@ class WriteKanji {
       }
     );
   }
+
 
   deleteKanji(id, callback) {
     db.query(`DELETE FROM kanjiwrite WHERE id = '${id}'`, (err, rows) => {

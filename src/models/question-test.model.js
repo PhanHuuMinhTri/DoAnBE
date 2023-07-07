@@ -91,12 +91,21 @@ class QuestionTest {
   }
 
   deleteQuestion(id, callback) {
-    db.query(
-      `DELETE FROM questiontestonline WHERE idQuestion = '${id}'`,
-      (err, rows) => {
-        callback(err, rows);
+    db.query(`DELETE FROM optionstest where idQuestion = '${id}'`,
+    (err, rows) => {
+      if(!err){
+        db.query(
+          `DELETE FROM questiontestonline WHERE idQuestion = '${id}'`,
+          (err, rows) => {
+            callback(err, rows);
+          }
+        );
       }
-    );
+      else{
+        callback(err, rows)
+      }
+    })
+   
   }
 }
 
